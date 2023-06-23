@@ -57,14 +57,14 @@ async def downloading(event, big=False):
                             f.write(chunk)
                         f.close()
                         await event.edit("<b>Отправка...</b>\n"+url)
-                        await event.client.send_file(event.to_id, open(fname, "rb"), reply_to=reply)
+                        await event.client.send_file(message.chat_id, open(fname, "rb"), reply_to=reply)
                         os.remove(fname)
                     else:
                         file = io.BytesIO(await response.read())
                         file.name = fname
                         file.seek(0)
                         await event.edit("<b>Отправка...</b>\n"+url)
-                        await event.client.send_file(event.to_id, file, reply_to=reply)
+                        await event.client.send_file(message.chat_id, file, reply_to=reply)
 
             except Exception as e:
                 await event.reply("<b>Ошибка при загрузке!</b>\n"+url+"\n<code>"+str(e)+"</code>")
